@@ -8,23 +8,35 @@
 const { React } = BdApi;
 
 module.exports = class AccountStats {
-  getName() { return "AccountStats"; }
-  getDescription() { return "Displays join date, Discord ID, discriminator, bots in friends list, servers joined, owned servers, account age, and more."; }
-  getVersion() { return "1.6.3"; }
-  getAuthor() { return "Vladimir43565"; }  // Changed to your GitHub username
+  getName() {
+    return "AccountStats";
+  }
+
+  getDescription() {
+    return "Displays join date, Discord ID, discriminator, bots in friends list, servers joined, owned servers, account age, and more. Displays a color or GIF banner if available.";
+  }
+
+  getVersion() {
+    return "1.6.3";
+  }
+
+  getAuthor() {
+    return "Vladimir43565";
+  }
 
   start() {}
+
   stop() {}
 
   getSettingsPanel() {
     const userModule = BdApi.findModuleByProps("getCurrentUser");
     const relationships = BdApi.findModuleByProps("getRelationships");
     const guildsModule = BdApi.findModuleByProps("getGuilds");
-    const PresenceStore = BdApi.findModuleByProps("getStatus");  // Added PresenceStore to get status
+    const PresenceStore = BdApi.findModuleByProps("getStatus");
 
     const currentUser = userModule.getCurrentUser();
     const creationDate = new Date(currentUser.createdAt || currentUser.createdTimestamp || 0);
-    const joinDate = creationDate.toLocaleString();  // Full date and time
+    const joinDate = creationDate.toLocaleString();
 
     const friendRelations = relationships.getRelationships();
     const allUsers = BdApi.findModuleByProps("getUsers").getUsers();
@@ -33,9 +45,6 @@ module.exports = class AccountStats {
 
     const allGuilds = guildsModule.getGuilds();
     const totalGuilds = Object.keys(allGuilds).length;
-
-    // Debugging: Check what guilds you have
-    console.log("All guilds:", allGuilds);
     
     // Filtering owned guilds
     const ownedGuilds = Object.values(allGuilds)
