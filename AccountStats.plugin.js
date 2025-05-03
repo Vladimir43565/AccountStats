@@ -1,8 +1,8 @@
 /**
  * @name AccountStats
- * @version 1.6.2
- * @author Me
- * @description Displays join date, Discord ID, discriminator, bots in friends list, servers joined, owned servers, account age, and more. Displays a banner with a color or GIF if available.
+ * @version 1.6.3
+ * @author Vladimir43565
+ * @description Displays join date, Discord ID, discriminator, bots in friends list, servers joined, owned servers, account age, and more. Displays a color or GIF banner if available.
  */
 
 const { React } = BdApi;
@@ -10,8 +10,8 @@ const { React } = BdApi;
 module.exports = class AccountStats {
   getName() { return "AccountStats"; }
   getDescription() { return "Displays join date, Discord ID, discriminator, bots in friends list, servers joined, owned servers, account age, and more."; }
-  getVersion() { return "1.6.2"; }
-  getAuthor() { return "Me"; }
+  getVersion() { return "1.6.3"; }
+  getAuthor() { return "Vladimir43565"; }  // Changed to your GitHub username
 
   start() {}
   stop() {}
@@ -77,12 +77,15 @@ module.exports = class AccountStats {
     const userStatus = PresenceStore.getStatus(currentUser.id) || "unknown";  // Default to "unknown" if not found
     const userStatusText = statusEmojis[userStatus] || "❔ Unknown"; // Display status with emoji
 
-    // Determine if the banner is a GIF or static image
+    // Determine if the banner is a GIF or color
     let bannerDisplay = null;
     if (currentUser.banner) {
       if (currentUser.banner.startsWith("a_")) {
         // It's a GIF
         bannerDisplay = React.createElement("a", { href: bannerUrl, target: "_blank", style: { color: "white" } }, `🎥 GIF Banner: ${bannerUrl}`);
+      } else if (currentUser.banner.startsWith("#")) {
+        // It's a solid color banner
+        bannerDisplay = React.createElement("div", { style: { backgroundColor: currentUser.banner, width: "100%", height: "150px", borderRadius: "8px" } });
       } else {
         // Static image
         bannerDisplay = React.createElement("img", { src: bannerUrl, alt: "Banner", style: { width: "100%", height: "150px", borderRadius: "8px" } });
