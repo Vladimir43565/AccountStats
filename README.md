@@ -10,7 +10,7 @@ Displays detailed account stats, including:
 - Account age (in years, months, and days)
 
 ## How to Install
-1. Download the plugin file from [GitHub](https://github.com/your-repo-link](https://github.com/Vladimir43565/AccountStats/tree/main)).
+1. Download the plugin file from [GitHub]((https://github.com/Vladimir43565/AccountStats).
 2. Move the `.plugin.js` file to the BetterDiscord plugins folder.
 3. Enable the plugin in the BetterDiscord settings.
 
