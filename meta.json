@@ -4,6 +4,6 @@
   "description": "Displays your Discord join date, friends who are bots, server stats, Nitro status, badges, and more.",
   "author": "Vladimir43565",
   "source": "https://github.com/Vladimir43565/AccountStats-BetterDiscord",
-  "updateUrl": "https://raw.githubusercontent.com/Vladimir43565/AccountStats-BetterDiscord/main/AccountStats.plugin.js",
+  "updateUrl": "https://raw.githubusercontent.com/Vladimir43565/AccountStats/main/AccountStats.plugin.js",
   "license": "MIT"
 }
