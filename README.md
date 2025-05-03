@@ -15,4 +15,4 @@ Displays detailed account stats, including:
 3. Enable the plugin in the BetterDiscord settings.
 
 ## Credits
-- Created by ChatGPT.
+- Created by v_vasilev_v
