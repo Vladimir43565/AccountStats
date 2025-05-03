@@ -15,4 +15,5 @@ Displays detailed account stats, including:
 3. Enable the plugin in the BetterDiscord settings.
 
 ## Credits
-- Created by v_vasilev_v
+- Created by ME
+- my dicord user v_vasilev_v
