@@ -16,4 +16,4 @@ Displays detailed account stats, including:
 
 ## Credits
 - Created by ME
-- my dicord user v_vasilev_v
+- my discord user v_vasilev_v
