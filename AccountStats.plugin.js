@@ -1,6 +1,6 @@
 /**
  * @name AccountStats
- * @version 1.6.0
+ * @version 1.6.1
  * @author Me
  * @description Displays join date, Discord ID, discriminator, bots in friends list, servers joined, owned servers, account age, and more.
  */
@@ -10,8 +10,8 @@ const { React } = BdApi;
 module.exports = class AccountStats {
   getName() { return "AccountStats"; }
   getDescription() { return "Displays join date, Discord ID, discriminator, bots in friends list, servers joined, owned servers, account age, and more."; }
-  getVersion() { return "1.6.0"; }
-  getAuthor() { return "ME"; }
+  getVersion() { return "1.6.1"; }
+  getAuthor() { return "Me"; }
 
   start() {}
   stop() {}
@@ -33,6 +33,11 @@ module.exports = class AccountStats {
 
     const allGuilds = guildsModule.getGuilds();
     const totalGuilds = Object.keys(allGuilds).length;
+
+    // Debugging: Check what guilds you have
+    console.log("All guilds:", allGuilds);
+    
+    // Filtering owned guilds
     const ownedGuilds = Object.values(allGuilds)
       .filter(guild => guild.ownerId === currentUser.id).length;
 
