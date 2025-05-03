@@ -1,2 +1,18 @@
-# AccountStats
-this is AccountStats for betterdiscord this can show you Displays join date, Discord ID, discriminator, bots in friends list, servers joined, owned servers, account age, and more. you have to go to plugins and click the settings botton 
+# AccountStats BetterDiscord Plugin
+
+## Description
+Displays detailed account stats, including:
+- Join date and time
+- Total friends count
+- Server count
+- Nitro subscription status
+- User badges
+- Account age (in years, months, and days)
+
+## How to Install
+1. Download the plugin file from [GitHub](https://github.com/your-repo-link).
+2. Move the `.plugin.js` file to the BetterDiscord plugins folder.
+3. Enable the plugin in the BetterDiscord settings.
+
+## Credits
+- Created by ChatGPT.
