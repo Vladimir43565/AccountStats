@@ -1,0 +1,9 @@
+{
+  "name": "AccountStats",
+  "version": "1.3.0",
+  "description": "Displays your Discord join date, bots you're friends with, server stats, Nitro status, and more.",
+  "author": "v_vasilev_vT",
+  "source": "https://github.com/Vladimir43565/AccountStats",
+  "updateUrl": "https://raw.githubusercontent.com/Vladimir43565/AccountStats-BetterDiscord/main/AccountStats.plugin.js",
+  "license": "MIT"
+}
