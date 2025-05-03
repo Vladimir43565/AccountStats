@@ -1,8 +1,8 @@
 /**
  * @name AccountStats
- * @version 1.6.1
+ * @version 1.6.2
  * @author Me
- * @description Displays join date, Discord ID, discriminator, bots in friends list, servers joined, owned servers, account age, and more.
+ * @description Displays join date, Discord ID, discriminator, bots in friends list, servers joined, owned servers, account age, and more. Displays a banner with a color or GIF if available.
  */
 
 const { React } = BdApi;
@@ -10,7 +10,7 @@ const { React } = BdApi;
 module.exports = class AccountStats {
   getName() { return "AccountStats"; }
   getDescription() { return "Displays join date, Discord ID, discriminator, bots in friends list, servers joined, owned servers, account age, and more."; }
-  getVersion() { return "1.6.1"; }
+  getVersion() { return "1.6.2"; }
   getAuthor() { return "Me"; }
 
   start() {}
@@ -77,6 +77,20 @@ module.exports = class AccountStats {
     const userStatus = PresenceStore.getStatus(currentUser.id) || "unknown";  // Default to "unknown" if not found
     const userStatusText = statusEmojis[userStatus] || "❔ Unknown"; // Display status with emoji
 
+    // Determine if the banner is a GIF or static image
+    let bannerDisplay = null;
+    if (currentUser.banner) {
+      if (currentUser.banner.startsWith("a_")) {
+        // It's a GIF
+        bannerDisplay = React.createElement("a", { href: bannerUrl, target: "_blank", style: { color: "white" } }, `🎥 GIF Banner: ${bannerUrl}`);
+      } else {
+        // Static image
+        bannerDisplay = React.createElement("img", { src: bannerUrl, alt: "Banner", style: { width: "100%", height: "150px", borderRadius: "8px" } });
+      }
+    } else {
+      bannerDisplay = "No banner available.";
+    }
+
     return React.createElement("div", { style: { padding: "20px", backgroundColor: "#2f3136", color: "white", borderRadius: "8px" } },
       React.createElement("h2", { style: { color: "#7289da" } }, "📊 Account Stats"),
       React.createElement("div", null, `🗓️ Joined Discord: ${joinDate}`),
@@ -89,7 +103,7 @@ module.exports = class AccountStats {
       React.createElement("div", null, `🖼️ Avatar:`, React.createElement("img", { src: avatarUrl, alt: "Avatar", style: { width: "50px", height: "50px", borderRadius: "50%" } })),
       React.createElement("div", null, `💬 Status: ${userStatusText}`),
       React.createElement("div", null, `👥 Total Friends: ${totalFriends}`),
-      React.createElement("div", null, `🖼️ Banner: ${bannerUrl}`),
+      React.createElement("div", null, `🖼️ Banner: ${bannerDisplay}`),  // Added dynamic banner display
       React.createElement("div", null, `🔥 Nitro Subscription: ${premiumType}`),
       React.createElement("div", null, `⏳ Account Age: ${ageInYears} years, ${remainingMonths} months, and ${remainingDays} days`),
       React.createElement("div", null, `🏅 User Badges: ${userBadges}`)
