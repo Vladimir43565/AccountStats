@@ -11,7 +11,7 @@ module.exports = class AccountStats {
   getName() { return "AccountStats"; }
   getDescription() { return "Displays join date, Discord ID, discriminator, bots in friends list, servers joined, owned servers, account age, and more."; }
   getVersion() { return "1.6.0"; }
-  getAuthor() { return "ChatGPT"; }
+  getAuthor() { return "ME"; }
 
   start() {}
   stop() {}
@@ -20,6 +20,7 @@ module.exports = class AccountStats {
     const userModule = BdApi.findModuleByProps("getCurrentUser");
     const relationships = BdApi.findModuleByProps("getRelationships");
     const guildsModule = BdApi.findModuleByProps("getGuilds");
+    const PresenceStore = BdApi.findModuleByProps("getStatus");  // Added PresenceStore to get status
 
     const currentUser = userModule.getCurrentUser();
     const creationDate = new Date(currentUser.createdAt || currentUser.createdTimestamp || 0);
@@ -61,6 +62,16 @@ module.exports = class AccountStats {
     if (badges & 64) badgeList.push("Bug Hunter");
     const userBadges = badgeList.length > 0 ? badgeList.join(", ") : "No badges";
 
+    // Get the user status (online, idle, dnd, offline)
+    const statusEmojis = {
+      online: "🟢 Online",
+      idle: "🌙 Idle",
+      dnd: "⛔ Do Not Disturb",
+      offline: "⚫ Offline",
+    };
+    const userStatus = PresenceStore.getStatus(currentUser.id) || "unknown";  // Default to "unknown" if not found
+    const userStatusText = statusEmojis[userStatus] || "❔ Unknown"; // Display status with emoji
+
     return React.createElement("div", { style: { padding: "20px", backgroundColor: "#2f3136", color: "white", borderRadius: "8px" } },
       React.createElement("h2", { style: { color: "#7289da" } }, "📊 Account Stats"),
       React.createElement("div", null, `🗓️ Joined Discord: ${joinDate}`),
@@ -71,7 +82,7 @@ module.exports = class AccountStats {
       React.createElement("div", null, `🛡️ Servers You Own: ${ownedGuilds}`),
       React.createElement("div", null, `🌐 Servers You're In: ${totalGuilds}`),
       React.createElement("div", null, `🖼️ Avatar:`, React.createElement("img", { src: avatarUrl, alt: "Avatar", style: { width: "50px", height: "50px", borderRadius: "50%" } })),
-      React.createElement("div", null, `💬 Status: ${status}`),
+      React.createElement("div", null, `💬 Status: ${userStatusText}`),
       React.createElement("div", null, `👥 Total Friends: ${totalFriends}`),
       React.createElement("div", null, `🖼️ Banner: ${bannerUrl}`),
       React.createElement("div", null, `🔥 Nitro Subscription: ${premiumType}`),
