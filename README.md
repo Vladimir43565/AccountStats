@@ -14,9 +14,6 @@ Displays detailed account stats, including:
 2. Move the `.plugin.js` file to the BetterDiscord plugins folder.
 3. Enable the plugin in the BetterDiscord settings.
 
-## Credits
-- Created by ChatGPT.
-
 
 ## Credits
 - Created by ME
