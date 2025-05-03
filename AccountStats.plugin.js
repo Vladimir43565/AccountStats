@@ -1,7 +1,7 @@
 /**
  * @name AccountStats
  * @version 1.6.0
- * @author ChatGPT
+ * @author Me
  * @description Displays join date, Discord ID, discriminator, bots in friends list, servers joined, owned servers, account age, and more.
  */
 
