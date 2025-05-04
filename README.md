@@ -11,7 +11,7 @@ Displays detailed account stats, including:
 
 ## How to Install
 1. Download the plugin file from [GitHub][(https://github.com/AccountStats)](https://github.com/Vladimir43565/AccountStats).
-2. Move the `.AccountStats.plugin.js` file to the BetterDiscord plugins folder.
+2. Move the `AccountStats.plugin.js` file to the BetterDiscord plugins folder.
 3. Enable the plugin in the BetterDiscord settings.
 
 
