@@ -130,22 +130,25 @@ module.exports = class AccountStats {
         maxWidth: "500px",
         margin: "auto",
         boxShadow: "0 4px 20px rgba(0,0,0,0.4)",
+        transition: "transform 0.3s ease-in-out"
       }
     },
       React.createElement("h2", {
         style: {
           color: "#7289da",
-          fontSize: "24px",
+          fontSize: "26px",
           fontWeight: "bold",
-          marginBottom: "10px",
+          marginBottom: "15px",
+          textAlign: "center"
         }
       }, "📊 Account Stats"),
       React.createElement("p", {
         style: {
           fontStyle: "italic",
-          fontSize: "14px",
+          fontSize: "16px",
           color: "#b9bbbe",
-          marginBottom: "20px"
+          marginBottom: "20px",
+          textAlign: "center"
         }
       }, randomMessage),
       bannerDisplay,
@@ -153,9 +156,10 @@ module.exports = class AccountStats {
         style: {
           display: "grid",
           gridTemplateColumns: "1fr",
-          gap: "8px",
+          gap: "12px",
           width: "100%",
-          textAlign: "left"
+          textAlign: "left",
+          marginBottom: "20px"
         }
       },
         React.createElement("div", null, `🗓️ Joined Discord: ${joinDate}`),
@@ -182,11 +186,11 @@ module.exports = class AccountStats {
           src: avatarUrl,
           alt: "Avatar",
           style: {
-            width: "80px",
-            height: "80px",
+            width: "90px",
+            height: "90px",
             borderRadius: "50%",
-            marginTop: "8px",
-            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.5)"
+            marginTop: "10px",
+            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.6)"
           }
         })
       )
