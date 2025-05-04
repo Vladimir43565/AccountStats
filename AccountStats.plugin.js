@@ -1,16 +1,16 @@
 /**
  * @name AccountStats
- * @version 1.9.1
+ * @version 2.0.0
  * @author Vladimir43565
- * @description Stylish profile stats viewer with sleek UI, vibrant colors, motivational messages, and badge/banner display.
+ * @description Stylish profile stats viewer with sleek UI, vibrant colors, motivational messages, badge/banner display, update log, and Discord invite.
  */
 
 const { React } = BdApi;
 
 module.exports = class AccountStats {
   getName() { return "AccountStats"; }
-  getDescription() { return "Stylish profile stats viewer with sleek UI, vibrant colors, motivational messages, and badge/banner display."; }
-  getVersion() { return "1.9.1"; }
+  getDescription() { return "Stylish profile stats viewer with sleek UI, vibrant colors, motivational messages, badge/banner display, update log, and Discord invite."; }
+  getVersion() { return "2.0.0"; }
   getAuthor() { return "Vladimir43565"; }
 
   start() {}
@@ -23,8 +23,7 @@ module.exports = class AccountStats {
     const PresenceStore = BdApi.findModuleByProps("getStatus");
 
     const currentUser = userModule.getCurrentUser();
-    const creationDate = new Date(currentUser.createdAt || currentUser.createdTimestamp || 0);
-    const joinDate = creationDate.toLocaleString();
+    const joinDate = new Date(currentUser.createdAt || currentUser.createdTimestamp || 0).toLocaleString();
 
     const friendRelations = relationships.getRelationships();
     const allUsers = BdApi.findModuleByProps("getUsers").getUsers();
@@ -33,14 +32,14 @@ module.exports = class AccountStats {
 
     const allGuilds = guildsModule.getGuilds();
     const totalGuilds = Object.keys(allGuilds).length;
-    const ownedGuilds = Object.values(allGuilds)
-      .filter(guild => guild.ownerId === currentUser.id).length;
+    const ownedGuilds = Object.values(allGuilds).filter(guild => guild.ownerId === currentUser.id).length;
 
     const discordId = currentUser.id;
     const discriminator = currentUser.discriminator;
     const username = currentUser.username;
     const avatarUrl = `https://cdn.discordapp.com/avatars/${discordId}/${currentUser.avatar}.png`;
     const status = PresenceStore.getStatus(currentUser.id) || "unknown";
+
     const statusMap = {
       online: "🟢 Online",
       idle: "🌙 Idle",
@@ -48,6 +47,7 @@ module.exports = class AccountStats {
       offline: "⚫ Offline",
       unknown: "❔ Unknown"
     };
+
     const userStatusText = statusMap[status] || "❔ Unknown";
     const totalFriends = Object.values(friendRelations).filter(type => type === 1).length;
 
@@ -71,7 +71,11 @@ module.exports = class AccountStats {
     if (currentUser.banner) {
       const bannerUrl = `https://cdn.discordapp.com/banners/${discordId}/${currentUser.banner}.png`;
       if (currentUser.banner.startsWith("a_")) {
-        bannerDisplay = React.createElement("a", { href: bannerUrl, target: "_blank", style: { color: "white" } }, `🎥 GIF Banner: ${bannerUrl}`);
+        bannerDisplay = React.createElement("a", {
+          href: bannerUrl,
+          target: "_blank",
+          style: { color: "white" }
+        }, `🎥 GIF Banner: ${bannerUrl}`);
       } else {
         bannerDisplay = React.createElement("img", {
           src: bannerUrl,
@@ -104,17 +108,21 @@ module.exports = class AccountStats {
       "😎 You’ve got this!", "🍀 Today’s your lucky day!", "✨ Shine bright!", "🌻 Keep blooming!",
       "🎯 Stay persistent, success is near.", "💡 Every day is a new chance to be amazing.",
       "🌟 Embrace the journey, it’s worth it.", "🚀 The best is yet to come!", "🛠️ You’re building something great.",
-      "💫 You’ve got everything it takes to succeed.", "💪 Strength doesn’t come from what you can do, it comes from overcoming what you thought you couldn’t.",
-      "🌟 Believe in yourself and all that you are.", "🔑 The only limit is your mind.",
-      "⚡ Every setback is a setup for a comeback.", "🌱 Growth takes time, but it’s happening.",
-      "💥 Your potential is limitless.", "🌊 Keep pushing, even when it feels tough.",
-      "🕊️ Peace comes from within. Keep your calm!", "🔥 Don’t stop until you’re proud.",
+      "💫 You’ve got everything it takes to succeed.", "⚡ Every setback is a setup for a comeback.",
+      "🌱 Growth takes time, but it’s happening.", "🔥 Don’t stop until you’re proud.",
       "👟 You’re one step closer to your goal.", "🎉 Keep shining, the world needs your light.",
       "💖 The best is yet to come, keep going!", "🎯 Stay focused. Stay hungry. Stay humble.",
       "✨ You are one decision away from a totally different life."
     ];
 
     const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+
+    const whatsNew = [
+      "🆕 Added 'What's New' section to track updates.",
+      "📦 Display current plugin version (v2.0.0).",
+      "🌐 Added Discord invite link with member count.",
+      "🎨 UI enhancements for cleaner layout.",
+    ];
 
     return React.createElement("div", {
       style: {
@@ -130,36 +138,35 @@ module.exports = class AccountStats {
         maxWidth: "500px",
         margin: "auto",
         boxShadow: "0 4px 20px rgba(0,0,0,0.4)",
-        transition: "transform 0.3s ease-in-out"
       }
     },
       React.createElement("h2", {
         style: {
           color: "#7289da",
-          fontSize: "26px",
+          fontSize: "24px",
           fontWeight: "bold",
-          marginBottom: "15px",
-          textAlign: "center"
+          marginBottom: "10px",
         }
       }, "📊 Account Stats"),
+
       React.createElement("p", {
         style: {
           fontStyle: "italic",
-          fontSize: "16px",
+          fontSize: "14px",
           color: "#b9bbbe",
-          marginBottom: "20px",
-          textAlign: "center"
+          marginBottom: "20px"
         }
       }, randomMessage),
+
       bannerDisplay,
+
       React.createElement("div", {
         style: {
           display: "grid",
           gridTemplateColumns: "1fr",
-          gap: "12px",
+          gap: "8px",
           width: "100%",
-          textAlign: "left",
-          marginBottom: "20px"
+          textAlign: "left"
         }
       },
         React.createElement("div", null, `🗓️ Joined Discord: ${joinDate}`),
@@ -171,8 +178,10 @@ module.exports = class AccountStats {
         React.createElement("div", null, `🛡️ Servers Owned: ${ownedGuilds}`),
         React.createElement("div", null, `🌐 Servers Joined: ${totalGuilds}`),
         React.createElement("div", null, `🔥 Nitro Type: ${premiumType}`),
-        React.createElement("div", null, `🏅 Badges: ${userBadges}`)
+        React.createElement("div", null, `🏅 Badges: ${userBadges}`),
+        React.createElement("div", null, `📦 Plugin Version: 2.0.0`)
       ),
+
       React.createElement("div", {
         style: {
           marginTop: "20px",
@@ -186,13 +195,53 @@ module.exports = class AccountStats {
           src: avatarUrl,
           alt: "Avatar",
           style: {
-            width: "90px",
-            height: "90px",
+            width: "80px",
+            height: "80px",
             borderRadius: "50%",
-            marginTop: "10px",
-            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.6)"
+            marginTop: "8px",
+            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.5)"
           }
         })
+      ),
+
+      React.createElement("a", {
+        href: "https://discord.gg/gTc3CMn7DR",
+        target: "_blank",
+        style: {
+          marginTop: "20px",
+          backgroundColor: "#5865F2",
+          color: "#ffffff",
+          padding: "10px 20px",
+          borderRadius: "8px",
+          textDecoration: "none",
+          fontWeight: "bold",
+          boxShadow: "0 4px 10px rgba(0,0,0,0.3)"
+        }
+      }, "🌐 Join Our Discord"),
+
+      React.createElement("div", {
+        style: {
+          marginTop: "10px",
+          fontSize: "14px",
+          color: "#b9bbbe"
+        }
+      }, "👥 Server Members: 1"),
+
+      React.createElement("div", {
+        style: {
+          marginTop: "20px",
+          width: "100%",
+          backgroundColor: "#202225",
+          padding: "12px",
+          borderRadius: "8px"
+        }
+      },
+        React.createElement("h4", {
+          style: { margin: "0 0 10px 0", color: "#ffffff" }
+        }, "📝 What's New:"),
+        ...whatsNew.map((item, index) =>
+          React.createElement("div", { key: index, style: { fontSize: "13px", color: "#b9bbbe" } }, item)
+        )
       )
     );
   }
