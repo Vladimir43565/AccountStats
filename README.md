@@ -7,7 +7,8 @@ Displays detailed account stats, including:
 - Server count
 - Nitro subscription status
 - User badges
-- Account age (in years, months, and days)
+- Badges
+- and plugin version 
 
 ## How to Install
 1. Download the plugin file from [GitHub][(https://github.com/AccountStats)](https://github.com/Vladimir43565/AccountStats).
