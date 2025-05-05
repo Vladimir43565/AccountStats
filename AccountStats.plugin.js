@@ -121,6 +121,7 @@ module.exports = class AccountStats {
       "🆕 Added 'What's New' section to track updates.",
       "📦 Display current plugin version (v2.0.0).",
       "🌐 Added Discord invite link with member count.",
+      "🧑‍💼 Server Owner ID: 1077629305867223101",
       "🎨 UI enhancements for cleaner layout.",
     ];
 
@@ -179,7 +180,8 @@ module.exports = class AccountStats {
         React.createElement("div", null, `🌐 Servers Joined: ${totalGuilds}`),
         React.createElement("div", null, `🔥 Nitro Type: ${premiumType}`),
         React.createElement("div", null, `🏅 Badges: ${userBadges}`),
-        React.createElement("div", null, `📦 Plugin Version: 2.0.0`)
+        React.createElement("div", null, `📦 Plugin Version: 2.0.0`),
+        React.createElement("div", null, `👑 Server Owner ID: 1077629305867223101`)
       ),
 
       React.createElement("div", {
