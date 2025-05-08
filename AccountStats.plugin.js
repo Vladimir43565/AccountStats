@@ -117,12 +117,20 @@ module.exports = class AccountStats {
 
     const randomMessage = messages[Math.floor(Math.random() * messages.length)];
 
+    // Easter Egg Activation
+    const triggerEasterEgg = () => {
+      alert("🎉 Surprise! You found the Easter Egg! Keep having fun with the plugin! 🌟");
+      const element = document.getElementById("accountStatsTitle");
+      element.style.color = "#ff6347"; // Change color as part of the Easter Egg
+    };
+
+    // What's New Array
     const whatsNew = [
-      "🆕 Added 'What's New' section to track updates.",
-      "📦 Display current plugin version (v2.0.0).",
-      "🌐 Added Discord invite link with member count.",
-      "🧑‍💼 Server Owner ID: 1077629305867223101",
-      "🎨 UI enhancements for cleaner layout.",
+      "✨ Fixed bugs and performance improvements.",
+      "🎉 Updated UI with smoother design.",
+      "🔧 Improved stats tracking.",
+      "💬 Added more motivational messages.",
+      "🛠️ Fixed several minor issues."
     ];
 
     return React.createElement("div", {
@@ -142,12 +150,15 @@ module.exports = class AccountStats {
       }
     },
       React.createElement("h2", {
+        id: "accountStatsTitle", // Unique ID for the title
         style: {
           color: "#7289da",
           fontSize: "24px",
           fontWeight: "bold",
           marginBottom: "10px",
-        }
+          cursor: "pointer" // Make the text clickable
+        },
+        onClick: triggerEasterEgg // Add the click event
       }, "📊 Account Stats"),
 
       React.createElement("p", {
@@ -229,6 +240,7 @@ module.exports = class AccountStats {
         }
       }, "👥 Server Members: 1"),
 
+      // What's New Section
       React.createElement("div", {
         style: {
           marginTop: "20px",
